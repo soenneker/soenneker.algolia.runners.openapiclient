@@ -77,6 +77,10 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
 
         string yamlDirectory = Path.Combine(gitDirectory, "openapi-yaml");
         string jsonDirectory = Path.Combine(gitDirectory, "openapi-json");
+
+        await _directoryUtil.DeleteIfExists(yamlDirectory, cancellationToken);
+        await _directoryUtil.DeleteIfExists(jsonDirectory, cancellationToken);
+
         await _directoryUtil.Create(yamlDirectory, cancellationToken: cancellationToken);
         await _directoryUtil.Create(jsonDirectory, cancellationToken: cancellationToken);
 
