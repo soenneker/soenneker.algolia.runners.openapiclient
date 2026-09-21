@@ -96,6 +96,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
             await _fileUtil.DeleteIfExists(jsonTargetPath, cancellationToken: cancellationToken);
 
             await _yamlUtil.SaveAsJson(yamlFilePath ?? yamlPath, jsonTargetPath, true, cancellationToken);
+            await _openApiFixer.Fix(jsonTargetPath, jsonTargetPath, cancellationToken).NoSync();
         }
 
         string mergedJson = _openApiMerger.ToJson(await _openApiMerger.MergeDirectory(jsonDirectory, cancellationToken).NoSync());
